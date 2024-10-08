@@ -15,6 +15,7 @@ async function getBalance(req, res){
     }
 
     res.json({
+        username : findUser.username,
         balance : findUser.balance
     })
 }

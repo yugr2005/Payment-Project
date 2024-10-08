@@ -24,7 +24,11 @@ async function transfer(req, res){
         return;
     }
 
-    await account.updateOne({_id : to}, {$inc : {balance : amount}})
+    const person = await account.findOne({username : to});
+    console.log(person);
+    console.log(to);
+
+    await account.updateOne({username : to}, {$inc : {balance : amount}})
     await account.updateOne({username : from}, {$inc : {balance : -amount}})
 
     res.json({
@@ -36,7 +40,6 @@ async function transfer(req, res){
     catch(err){
         console.log(err)
     }
-    
 }
 
 module.exports = transfer;
